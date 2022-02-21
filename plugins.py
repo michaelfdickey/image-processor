@@ -70,6 +70,13 @@ def display(image):
             print(prefix+middle+suffix)
 
     # pretty print pixels my way
+    ## prints an output like this for each row
+    """
+    R 255   R 255
+    G 0     G 0
+    B 0     B 0
+    A 255   A 0
+    """
     print()
     for pos1 in range(height):
         row = image[pos1]
@@ -97,16 +104,6 @@ def display(image):
             while len(this_pixel_alpha) < 4:
                 this_pixel_alpha = this_pixel_alpha = " "
             
-            #print("this_pixel_red is: ", this_pixel_red)
-            
-            """
-            R 255   R 255
-            G 0     G 0
-            B 0     B 0
-            A 255   A 0
-            """
-
-                      
             #print("R",this_pixel_red)
             this_row_reds.append(this_pixel_red)
             #print("G",this_pixel_green)
@@ -176,10 +173,30 @@ def mono(image, sepia=False):
     
     Parameter sepia: Whether to use sepia tone instead of greyscale
     Precondition: sepia is a bool
-    """
+    """ 
+
     # We recommend enforcing the precondition for sepia
+
+    # Get the image size
+    height = len(image)
+    width  = len(image[0])
+
+    for row in range(height):
+        for col in range(width):
+            #print()
+            pixel = image[row][col]
+            #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
+            brightness = 0.3 * pixel.red + 0.6 * pixel.green + 0.1 * pixel.blue
+            #print("brightness is: ", brightness)
+            #update each pixel
+            pixel.red = int(brightness)
+            pixel.green = int(brightness)
+            pixel.blue = int(brightness)
+            #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
+
+
     # Change this to return True when the function is implemented
-    return False
+    return True 
 
 
 def flip(image,vertical=False):
