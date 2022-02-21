@@ -73,22 +73,42 @@ def display(image):
     print()
     for pos1 in range(height):
         row = image[pos1]
+        this_row_reds = []
+        this_row_greens = []
+        this_row_blues = []  
         for pos2 in range(width):
             pixel = row[pos2]
-            print(type(pixel))
-            print(repr(pixel))
+            #print(type(pixel))
+            #print(repr(pixel))
             # get red
-            this_pixel_red = pixel.red
-            this_pixel_green = pixel.green
-            this_pixel_blue = pixel.blue
+            this_pixel_red = "R" + str(pixel.red)
+            print(len(this_pixel_red))
+            #print(type(this_pixel_red))
+            while len(this_pixel_red) < 4:
+                this_pixel_red = this_pixel_red + " "
+            this_pixel_green = "G" + str(pixel.green)
+            this_pixel_blue = "B" + str(pixel.blue)
             this_pixel_alpha = pixel.alpha
             #print("this_pixel_red is: ", this_pixel_red)
+            
+            """
+            R 255   R 255
+            G 0     G 0
+            B 0     B 0
+            A 255   A 0
+            """
 
-            print("R",this_pixel_red)
-            print("G",this_pixel_green)
-            print("B",this_pixel_blue)
-            print("A",this_pixel_alpha)
-
+                      
+            #print("R",this_pixel_red)
+            this_row_reds.append(this_pixel_red)
+            #print("G",this_pixel_green)
+            this_row_greens.append(this_pixel_green)
+            #print("B",this_pixel_blue)
+            this_row_blues.append(this_pixel_blue)
+            #print("A",this_pixel_alpha)
+        print(this_row_reds)
+        print(this_row_greens)
+        print(this_row_blues)
     
     # This function does not modify the image
     return
