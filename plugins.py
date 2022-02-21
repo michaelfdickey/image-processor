@@ -234,6 +234,46 @@ def flip(image,vertical=False):
     Precondition: vertical is a bool
     """
     # We recommend enforcing the precondition for vertical
+    
+    # get length and width
+    height = len(image)
+    width  = len(image[0])
+
+    # get flip index
+    
+    # flip image
+    print()
+    for row in range(height):
+        for col in range(width):
+
+            # get backup of current row
+            current_row = image[row]
+            #print(type(current_row))
+            #print("current_row is: ", current_row)
+            current_row_backup = image[row][:]
+            print("current_row_backup is: ", current_row_backup)
+            
+            # identify col of pixel to be copied from in backup
+            current_col = col
+            flip_source_col = abs(col - (width-1))
+            print("current_col is: ", col, "flip_source_col is: ", flip_source_col)
+
+            #iterage through pixels and overwrite with opposite from backup
+            #current_row_backup[]
+
+            """
+            print("current row is: ", current_row)
+            #identify current postion and target of current pixel
+            old_pixel = image[row][col]
+            print("row is: ", row, "col is: ", col, "pixel is: ", old_pixel, "current col is: ", col, "image width is: ", width, "image col index is: ", width-1)
+            pixel_new_col_pos = abs(col - (width-1))
+            print("old_pixel_col is: ", col, "pixel_new_col_pos is: ", pixel_new_col_pos)
+            """
+
+            #store current pixel, over-write target with current
+            #overwrite current with old target  
+
+
     # Change this to return True when the function is implemented
     return False
 
