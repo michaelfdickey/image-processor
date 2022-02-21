@@ -68,6 +68,27 @@ def display(image):
                 suffix = (' '*padding)+' ],'
             
             print(prefix+middle+suffix)
+
+    # pretty print pixels my way
+    print()
+    for pos1 in range(height):
+        row = image[pos1]
+        for pos2 in range(width):
+            pixel = row[pos2]
+            print(type(pixel))
+            print(repr(pixel))
+            # get red
+            this_pixel_red = pixel.red
+            this_pixel_green = pixel.green
+            this_pixel_blue = pixel.blue
+            this_pixel_alpha = pixel.alpha
+            #print("this_pixel_red is: ", this_pixel_red)
+
+            print("R",this_pixel_red)
+            print("G",this_pixel_green)
+            print("B",this_pixel_blue)
+            print("A",this_pixel_alpha)
+
     
     # This function does not modify the image
     return
