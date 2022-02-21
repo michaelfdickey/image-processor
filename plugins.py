@@ -176,6 +176,12 @@ def mono(image, sepia=False):
     """ 
 
     # We recommend enforcing the precondition for sepia
+    sepia_valid = False
+    if sepia == False:
+        sepia_valid = True
+    if sepia == True:
+        sepia_valid = True 
+    assert sepia_valid == True, "Sepia must be 'True' or 'False'"
 
     # Get the image size
     height = len(image)
@@ -183,16 +189,30 @@ def mono(image, sepia=False):
 
     for row in range(height):
         for col in range(width):
-            #print()
-            pixel = image[row][col]
-            #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
-            brightness = 0.3 * pixel.red + 0.6 * pixel.green + 0.1 * pixel.blue
-            #print("brightness is: ", brightness)
-            #update each pixel
-            pixel.red = int(brightness)
-            pixel.green = int(brightness)
-            pixel.blue = int(brightness)
-            #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
+            
+            if sepia == False:
+                #print()
+                pixel = image[row][col]
+                #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
+                brightness = 0.3 * pixel.red + 0.6 * pixel.green + 0.1 * pixel.blue
+                #print("brightness is: ", brightness)
+                #update each pixel
+                pixel.red = int(brightness)
+                pixel.green = int(brightness)
+                pixel.blue = int(brightness)
+                #print("R", pixel.red, "G", pixel.green, "B", pixel.blue)
+
+            if sepia == True:
+                pixel = image[row][col]
+                brightness = 0.3 * pixel.red + 0.6 * pixel.green + 0.1 * pixel.blue
+                """
+                If sepia is True, it makes the same computations as before but sets green to
+                0.6 * brightness and blue to 0.4 * brightness.
+                """
+                pixel.red = int(brightness)
+                pixel.green = int(0.6 * brightness)
+                pixel.blue = int(0.4 * brightness)
+                
 
 
     # Change this to return True when the function is implemented
