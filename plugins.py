@@ -235,10 +235,25 @@ def flip(image,vertical=False):
     Parameter vertical: Whether to reflect the image vertically
     Precondition: vertical is a bool
     """
-    # We recommend enforcing the precondition for vertical
-    
-    print()
+    # We recommend enforcing the precondition for vertical    
+    #print()
     print("vertical is: ", vertical)
+
+    vertical_valid = False 
+    if vertical == False:
+        vertical_valid = True 
+    if vertical == True:
+        vertical_valid = True 
+    assert vertical_valid == True, "Vertical must be 'True' or 'False'"
+
+    """
+    sepia_valid = False
+    if sepia == False:
+        sepia_valid = True
+    if sepia == True:
+        sepia_valid = True 
+    assert sepia_valid == True, "Sepia must be 'True' or 'False'"
+    """
 
     # get length and width
     height = len(image)
@@ -269,33 +284,33 @@ def flip(image,vertical=False):
 
     #flip vertical
     if vertical == True:
-        print()
-        print("running flipping vertically")
+        #print()
+        #print("running flipping vertically")
         
         #copy image
         image_copy = copy.deepcopy(image)
 
         for row in range(height):
 
-            print("processing row: ", row)
+            #print("processing row: ", row)
 
             for col in range(width):
 
                 #this pixel
                 pixel = image[row][col]
-                print("row is: ", row, "col is: ", col, "pixel is: ", pixel)
+                #print("row is: ", row, "col is: ", col, "pixel is: ", pixel)
 
                 #determine what pixel should replace this one
                 replace_by_row = abs((height-1) - row)
                 replace_by_pixel = image_copy[replace_by_row][col]
-                print(" replace_by_row is: ", replace_by_row, "replace by pixel is: ", replace_by_pixel)
+                #print(" replace_by_row is: ", replace_by_row, "replace by pixel is: ", replace_by_pixel)
 
                 #update pixel values
                 pixel.red = replace_by_pixel.red 
                 pixel.green = replace_by_pixel.green 
                 pixel.blue = replace_by_pixel.blue 
                 pixel.alpha = replace_by_pixel.alpha 
-                print("  pixel is now, ", pixel)
+                #print("  pixel is now, ", pixel)
 
 
     # Change this to return True when the function is implemented
