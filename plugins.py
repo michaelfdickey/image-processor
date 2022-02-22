@@ -341,12 +341,6 @@ def transpose(image):
         image_copy.append([])
         for count in range(height):
             image_copy[index].append(count)
-  
-    #print("image is:             ", image)
-    #print("image height is:      ", len(image), "width is: ", len(image[0]))
-    #print("image_copy is:        ", image_copy)
-    #print("image_copy height is: ", len(image_copy), "width is: ", len(image_copy[0]))
-    
 
     # copy the pixels to the copy list in new row + col position
     for row_index in range(height):     
@@ -363,18 +357,6 @@ def transpose(image):
             copy_to_col = row_index
             
             image_copy[col_index][row_index] = image[row_index][col_index]
-
-            """
-            replace_by_pixel = image_copy[replace_by_row][col]
-            #print(" replace_by_row is: ", replace_by_row, "replace by pixel is: ", replace_by_pixel)
-
-            #update pixel values
-            pixel.red = replace_by_pixel.red 
-            pixel.green = replace_by_pixel.green 
-            pixel.blue = replace_by_pixel.blue 
-            pixel.alpha = replace_by_pixel.alpha 
-            #print("  pixel is now, ", pixel)
-            """
 
     #print("image_copy is ", image_copy)
 
@@ -393,24 +375,14 @@ def transpose(image):
         image.append([])
         for count in range(width):
             image[index].append(count)
-
     #print("image height is: ", len(image), "image width is: ", len(image[0]))
 
     # repopulate cleared image with all values from transposed image_copy
     for row_index in range(height):
-
         for col_index in range(width):
-
             #print("row_index is: ", row_index, "col_index is: ", col_index)
-
             image[row_index][col_index] = image_copy[row_index][col_index]
-
             #print("image is: ", image)
-
-    """
-    table[row_index].append(float(row_sum))
-    """
-
 
     # Change this to return True when the function is implemented
     return True
