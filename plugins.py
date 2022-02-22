@@ -325,6 +325,63 @@ def transpose(image):
     Parameter image: The image buffer
     Precondition: image is a 2d table of RGB objects
     """
+   
+    #get height and width 
+    print()
+    height = len(image)
+    width  = len(image[0])
+    print("height is: ", height, "width is: ", width)
+   
+    #copy image
+
+    image_copy = []
+    print("image_copy len", len(image_copy))
+
+    # populate image_copy list with transposed dimension
+    for index in range(width):
+        image_copy.append([])
+        for count in range(height):
+            image_copy[index].append(count)
+  
+    print("image is:             ", image)
+    print("image height is:      ", len(image), "width is: ", len(image[0]))
+    print("image_copy is:        ", image_copy)
+    print("image_copy height is: ", len(image_copy), "width is: ", len(image_copy[0]))
+    
+
+    """
+    for row in range(width):
+        image_copy.append(row)
+        print(" image_copy len", len(image_copy))
+        for col in range(height):
+            print(" image_copy row ", row, "length ", len(image_copy[row]))
+            image_copy.append(col)
+
+    print("  image_copy is: ", image_copy)
+    """
+    
+
+    """
+    for row in range(height):
+
+        image_copy.append(row)
+
+        for col in range(width):
+            pixel = image[row][col]
+            print("row is: ", row, "col is: ", col, "pixel is: ", pixel)
+            
+            #print(" image_copy is: ", image_copy)
+            image_copy[row].append(pixel)      
+        print("  image_copy is: ", image_copy)
+    """
+
+
+    
+    """
+    table[row_index].append(float(row_sum))
+    """
+
+
     # Change this to return True when the function is implemented
     return False
 
