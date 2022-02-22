@@ -1,0 +1,11 @@
+2772473896768 current_row is:         [(red=255,green=0,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255), (red=255,green=255,blue=0,alpha=255)]
+2772473901632 current_row_flipped is: [(red=255,green=255,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255)]
+ pixel is row 0 col 0 (255,0,0,255) flip_source_pixel is:  (255,255,0,255)
+  pixel is now:  (255,255,0,255)
+   current_row is:  [(red=255,green=255,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255), (red=255,green=255,blue=0,alpha=255)]
+ pixel is row 0 col 1 (255,0,0,255) flip_source_pixel is:  (255,0,0,255)
+  pixel is now:  (255,0,0,255)
+   current_row is:  [(red=255,green=255,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255), (red=255,green=255,blue=0,alpha=255)]
+ pixel is row 0 col 2 (255,255,0,255) flip_source_pixel is:  (255,255,0,255)
+  pixel is now:  (255,255,0,255)
+   current_row is:  [(red=255,green=255,blue=0,alpha=255), (red=255,green=0,blue=0,alpha=255), (red=255,green=255,blue=0,alpha=255)]

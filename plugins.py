@@ -18,6 +18,8 @@ Author: YOUR NAME HERE
 Date: THE DATE HERE
 """
 
+import copy 
+
 
 # Function useful for debugging
 def display(image):
@@ -244,23 +246,55 @@ def flip(image,vertical=False):
     # flip image
     print()
     for row in range(height):
-        for col in range(width):
 
-            # get backup of current row
-            current_row = image[row]
-            #print(type(current_row))
-            #print("current_row is: ", current_row)
-            current_row_backup = image[row][:]
-            print("current_row_backup is: ", current_row_backup)
-            
-            # identify col of pixel to be copied from in backup
+        # get backup of current row
+        current_row = image[row]
+        current_row_flipped = copy.deepcopy(current_row)
+        print(id(current_row), "current_row is:        ", current_row)
+        print(id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+        
+        current_row_flipped.reverse()
+        print(id(current_row), "current_row is:        ", current_row)
+        print(id(current_row_flipped), "current_row_flipped is:", current_row_flipped, "<< after flipping")
+
+        for col in range(width):
+     
+            # identify column of pixel to be copied from in backup
+            """ not needed with the reverse()
             current_col = col
             flip_source_col = abs(col - (width-1))
             print("current_col is: ", col, "flip_source_col is: ", flip_source_col)
+            """
 
-            #iterage through pixels and overwrite with opposite from backup
+            #iterage through pixels and overwrite with values from flipped backup
+            pixel = image[row][col]
+            print("",id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+            #print(" pixel is: ", pixel)
+            flip_source_pixel = current_row_flipped[col]
+            print("        flip_source_pixel is: ", flip_source_pixel, type(flip_source_pixel))
+            print(" pixel is row", row, "col", col, pixel, "flip_source_pixel is: ", flip_source_pixel)
+            print(" ",id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+
+            #update each pixel color with color from flip source pixel backup
+            pixel.red = flip_source_pixel.red 
+            #print("  ", "red" ,id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+            pixel.green = flip_source_pixel.green 
+            #print("  ", "green", id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+            pixel.blue = flip_source_pixel.blue 
+            #print("  ", "blue", id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+            pixel.alpha = flip_source_pixel.alpha
+            print("  ","alpha",id(current_row_flipped), "current_row_flipped is:", current_row_flipped)
+            print("  pixel is now: ", pixel) 
+            print("   current_row is:         ", image[row])
+            print("   current_row_flipped is: ", current_row_flipped)
+            
+
+            """ #analyze results
+            print("current_row was:    ", current_row_backup)
+            print("current_row is now: ", current_row)
+            """
+
             #current_row_backup[]
-
             """
             print("current row is: ", current_row)
             #identify current postion and target of current pixel
@@ -275,7 +309,7 @@ def flip(image,vertical=False):
 
 
     # Change this to return True when the function is implemented
-    return False
+    return True
 
 
 def transpose(image):
