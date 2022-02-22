@@ -408,13 +408,19 @@ def rotate(image,right=False):
     # We recommend enforcing the precondition for right
     
     #rotate left
-    ## transpose
-    transpose(image)
-    ## flip vertically
-    flip(image,vertical=True)
+    if right == False:
+        ## transpose
+        transpose(image)
+        ## flip vertically
+        flip(image,vertical=True)
 
     #rotate right
-
+    if right == True:
+        ## flip vertically
+        flip(image,vertical=True)
+        ## transpose
+        transpose(image)
+    
 
 
     # Change this to return True when the function is implemented
