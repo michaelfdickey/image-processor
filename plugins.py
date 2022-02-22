@@ -406,8 +406,19 @@ def rotate(image,right=False):
     Precondition: right is a bool
     """
     # We recommend enforcing the precondition for right
+    
+    #rotate left
+    ## transpose
+    transpose(image)
+    ## flip vertically
+    flip(image,vertical=True)
+
+    #rotate right
+
+
+
     # Change this to return True when the function is implemented
-    return False
+    return True
 
 
 # ADVANCED OPTIONAL FUNCTIONS
