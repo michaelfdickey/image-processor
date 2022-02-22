@@ -333,11 +333,10 @@ def transpose(image):
     print("height is: ", height, "width is: ", width)
    
     #copy image
-
     image_copy = []
     print("image_copy len", len(image_copy))
 
-    # populate image_copy list with transposed dimension
+    # populate image_copy list with transposed dimensions
     for index in range(width):
         image_copy.append([])
         for count in range(height):
@@ -349,32 +348,35 @@ def transpose(image):
     print("image_copy height is: ", len(image_copy), "width is: ", len(image_copy[0]))
     
 
-    """
-    for row in range(width):
-        image_copy.append(row)
-        print(" image_copy len", len(image_copy))
-        for col in range(height):
-            print(" image_copy row ", row, "length ", len(image_copy[row]))
-            image_copy.append(col)
+    # copy the pixels to the copy list in new row + col position
+    for row_index in range(height):     
+        print(" row_index is ", row_index)
+        for col_index in range(width):
+            print(" col_index is: ", col_index)
 
-    print("  image_copy is: ", image_copy)
-    """
-    
+            # this pixel
+            pixel = image[row_index][col_index]
+            print("  row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
 
-    """
-    for row in range(height):
-
-        image_copy.append(row)
-
-        for col in range(width):
-            pixel = image[row][col]
-            print("row is: ", row, "col is: ", col, "pixel is: ", pixel)
+            #determine what pixel should replace this one
+            copy_to_row = col_index
+            copy_to_col = row_index
             
-            #print(" image_copy is: ", image_copy)
-            image_copy[row].append(pixel)      
-        print("  image_copy is: ", image_copy)
-    """
+            image_copy[col_index][row_index] = image[row_index][col_index]
 
+            """
+            replace_by_pixel = image_copy[replace_by_row][col]
+            #print(" replace_by_row is: ", replace_by_row, "replace by pixel is: ", replace_by_pixel)
+
+            #update pixel values
+            pixel.red = replace_by_pixel.red 
+            pixel.green = replace_by_pixel.green 
+            pixel.blue = replace_by_pixel.blue 
+            pixel.alpha = replace_by_pixel.alpha 
+            #print("  pixel is now, ", pixel)
+            """
+
+    print("image_copy is ", image_copy)
 
     
     """
