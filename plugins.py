@@ -19,6 +19,7 @@ Date: THE DATE HERE
 """
 
 import copy 
+import math
 
 
 # Function useful for debugging
@@ -461,6 +462,30 @@ def vignette(image):
     Parameter image: The image buffer
     Precondition: image is a 2d table of RGB objects
     """
+    
+    #get image specs    
+    print()
+    height = len(image)
+    width  = len(image[0])
+    print("height is: ", height, "width is: ", width)
+    center_h = height/2
+    center_w = width/2
+    print("center_h is: ", center_h, "center_w is: ", center_w)
+
+    for row_index in range(height):
+
+        for col_index in range(width):
+
+            pixel = image[row_index][col_index]
+            print(" row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
+
+            #compute distance from center
+            distance_from_center = math.sqrt((abs(center_h - row_index)*abs(center_h - row_index)) + (abs(center_w - col_index)*abs(center_w - col_index)))
+            
+            print("  distance_from_center is: ", distance_from_center)
+            #dist( (r0,c0), (r1,c1)) = sqrt( (r0-r1)*(r0-r1)+(c0-c1)*(c0-c1) )
+
+
     # Change this to return True when the function is implemented
     return False
 
