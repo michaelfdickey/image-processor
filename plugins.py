@@ -236,8 +236,7 @@ def flip(image,vertical=False):
     Precondition: vertical is a bool
     """
     # We recommend enforcing the precondition for vertical    
-    #print()
-    print("vertical is: ", vertical)
+
 
     vertical_valid = False 
     if vertical == False:
@@ -246,14 +245,6 @@ def flip(image,vertical=False):
         vertical_valid = True 
     assert vertical_valid == True, "Vertical must be 'True' or 'False'"
 
-    """
-    sepia_valid = False
-    if sepia == False:
-        sepia_valid = True
-    if sepia == True:
-        sepia_valid = True 
-    assert sepia_valid == True, "Sepia must be 'True' or 'False'"
-    """
 
     # get length and width
     height = len(image)
@@ -262,7 +253,7 @@ def flip(image,vertical=False):
     # flip horizontal
     if vertical == False:
 
-        print()
+        #print()
         for row in range(height):
 
             # get backup of current row
