@@ -407,6 +407,13 @@ def rotate(image,right=False):
     """
     # We recommend enforcing the precondition for right
     
+    right_valid = False
+    if right == True:
+        right_valid = True
+    if right == False:
+        right_valid = True
+    assert right_valid == True, "Right needs to be 'True' or 'False'"
+
     #rotate left
     if right == False:
         ## transpose
