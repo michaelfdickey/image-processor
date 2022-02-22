@@ -237,34 +237,66 @@ def flip(image,vertical=False):
     """
     # We recommend enforcing the precondition for vertical
     
+    print()
+    print("vertical is: ", vertical)
+
     # get length and width
     height = len(image)
     width  = len(image[0])
    
-    # flip image
-    print()
-    for row in range(height):
+    # flip horizontal
+    if vertical == False:
 
-        # get backup of current row
-        current_row = image[row]
-        current_row_flipped = copy.deepcopy(current_row)        
-        current_row_flipped.reverse()
-        
-        for col in range(width):
-     
-            #iterage through pixels and overwrite with values from flipped backup
-            pixel = image[row][col]
-            flip_source_pixel = current_row_flipped[col]
+        print()
+        for row in range(height):
+
+            # get backup of current row
+            current_row = image[row]
+            current_row_flipped = copy.deepcopy(current_row)        
+            current_row_flipped.reverse()
             
-            #update each pixel color with color from flip source pixel backup
-            pixel.red = flip_source_pixel.red 
-            pixel.green = flip_source_pixel.green 
-            pixel.blue = flip_source_pixel.blue 
-            pixel.alpha = flip_source_pixel.alpha
+            for col in range(width):
+         
+                #iterage through pixels and overwrite with values from flipped backup
+                pixel = image[row][col]
+                flip_source_pixel = current_row_flipped[col]
+                
+                #update each pixel color with color from flip source pixel backup
+                pixel.red = flip_source_pixel.red 
+                pixel.green = flip_source_pixel.green 
+                pixel.blue = flip_source_pixel.blue 
+                pixel.alpha = flip_source_pixel.alpha
 
     #flip vertical
-    
-            
+    if vertical == True:
+        print()
+        print("running flipping vertically")
+        
+        #copy image
+        image_copy = copy.deepcopy(image)
+
+        for row in range(height):
+
+            print("processing row: ", row)
+
+            for col in range(width):
+
+                #this pixel
+                pixel = image[row][col]
+                print("row is: ", row, "col is: ", col, "pixel is: ", pixel)
+
+                #determine what pixel should replace this one
+                replace_by_row = abs((height-1) - row)
+                replace_by_pixel = image_copy[replace_by_row][col]
+                print(" replace_by_row is: ", replace_by_row, "replace by pixel is: ", replace_by_pixel)
+
+                #update pixel values
+                pixel.red = replace_by_pixel.red 
+                pixel.green = replace_by_pixel.green 
+                pixel.blue = replace_by_pixel.blue 
+                pixel.alpha = replace_by_pixel.alpha 
+                print("  pixel is now, ", pixel)
+
 
     # Change this to return True when the function is implemented
     return True
