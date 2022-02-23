@@ -472,6 +472,10 @@ def vignette(image):
     center_w = width/2
     print("center_h is: ", center_h, "center_w is: ", center_w)
 
+    #compute distance from center to corner
+    distance_to_corner = math.sqrt((abs(center_h - 0)*abs(center_h - 0)) + (abs(center_w - 0)*abs(center_w - 0)))
+    print("distance_to_corner is: ", distance_to_corner)
+
     for row_index in range(height):
 
         for col_index in range(width):
@@ -479,15 +483,26 @@ def vignette(image):
             pixel = image[row_index][col_index]
             print(" row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
 
-            #compute distance from center
+            #compute distance from center to current pixel
             distance_from_center = math.sqrt((abs(center_h - row_index)*abs(center_h - row_index)) + (abs(center_w - col_index)*abs(center_w - col_index)))
-            
             print("  distance_from_center is: ", distance_from_center)
-            #dist( (r0,c0), (r1,c1)) = sqrt( (r0-r1)*(r0-r1)+(c0-c1)*(c0-c1) )
+                       
+            #calculate vigette factor
+            vignette_factor = 1 - (distance_from_center / distance_to_corner)*(distance_from_center / distance_to_corner)
+            #1 - (d / H)^2
+            print("  vignette_factor is: ", vignette_factor)
+
+            #update each pixel by multiplying color channels by vignette factor
+            pixel.red = int(pixel.red * vignette_factor)
+            pixel.green = int(pixel.green * vignette_factor)
+            pixel.blue = int(pixel.blue * vignette_factor)
+            print("   pixel is now: ", pixel)
+        
+
 
 
     # Change this to return True when the function is implemented
-    return False
+    return True
 
 
 def blur(image,radius=5):
