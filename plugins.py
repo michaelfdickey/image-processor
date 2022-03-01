@@ -14,8 +14,8 @@ for each of them.
 IMPORTANT: It is highly recommended that these functions enforce the preconditions for 
 any parameter after images.  Otherwise, command line typos may be hard to debug.
 
-Author: YOUR NAME HERE
-Date: THE DATE HERE
+Author: Michael Dickey
+Date: Feb 22 2022
 """
 
 import copy 
@@ -50,6 +50,8 @@ def display(image):
     
     # Pretty print the pixels
     print()
+    
+    """
     for pos1 in range(height):
         row = image[pos1]
         for pos2 in range(width):
@@ -71,6 +73,7 @@ def display(image):
                 suffix = (' '*padding)+' ],'
             
             print(prefix+middle+suffix)
+    """
 
     # pretty print pixels my way
     ## prints an output like this for each row
@@ -536,7 +539,43 @@ def blur(image,radius=5):
     """
     # We recommend enforcing the precondition for radius
     # Change this to return True when the function is implemented
-    return False
+    
+    # get image specs
+    height = len(image)
+    width  = len(image[0])
+
+    # create a copy of the image
+    image_copy = copy.deepcopy(image)
+
+    # loop over all pixels
+    for row_index in range(height):
+
+        for col_index in range(width):
+
+            # get the current pixel
+            pixel = image_copy[row_index][col_index]
+            #print("row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
+
+            print("pixel.red is: ", pixel.red)
+            print("pixel.green is: ", pixel.green)
+            print("pixel.blue is: ", pixel.blue)
+            print("pixel.alpha is: ", pixel.alpha)
+            
+            # get the average of the pixel
+            pixel_average = int((pixel.red + pixel.green + pixel.blue + pixel.alpha) / 4)
+            print("pixel_average is: ", pixel_average)
+
+            # assign the average to the pixel in the original
+            pixel_master = image[row_index][col_index]
+            pixel_master.red = pixel_average
+            pixel_master.green = pixel_average
+            pixel_master.blue = pixel_average
+            pixel_master.alpha = pixel_average
+
+          
+    display(image)
+    
+    return True
 
 
 
