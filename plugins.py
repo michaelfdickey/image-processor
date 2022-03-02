@@ -583,41 +583,51 @@ def blur(image,radius=1):
                 for box_row in range(radius):
                     print("  box_row is: ", box_row)
                     
-                    
                     for box_col in range(radius):
+                        
+                        # positive rows and positive columns
                         if (row_index + box_row) < height and (col_index + box_col) < width: 
                             this_pixel = image_copy[row_index + box_row][col_index + box_col]
                             print("   1-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
 
-                    for box_col in range(radius):
-                        if box_col > 0:
-                            if (row_index - box_row) >= 0 and (col_index - box_col) >= 0: 
-                                this_pixel = image_copy[row_index - box_row][col_index - box_col]
-                                print("   2-box_col is: ", box_col, " position is: ", row_index-box_row, col_index-box_col, "pixel is: ", this_pixel)
-
-                    for box_col in range(radius):
-                        if box_col > 0:
-                            if (row_index + box) < height and (col_index - box_col) >= 0: 
-                                this_pixel = image_copy[row_index + box_row][col_index - box_col]
-                                print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index-box_col, "pixel is: ", this_pixel)
-
-
-                    """
-                    for box_col in range(radius):
-                        if box_col > 0:
-                            box_col = box_col * -1
-                            if (row_index + box_row) < height and (col_index + box_col) >= 0: 
+                        #positive rows and negative columns
+                        box_col = box_col * -1
+                        #print("    box_col is: ", box_col, " box_row is: ", box_row)
+                        if box_col != 0:
+                            if (row_index + box_row) < height and (col_index + box_col) >= 0:
                                 this_pixel = image_copy[row_index + box_row][col_index + box_col]
                                 print("   2-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
-                    
-                    for box_col in range(radius):
+
+                        #negative rows and positive columns
+                        box_col = box_col * -1
                         box_row = box_row * -1
-                        if box_row > 0:
-                            if (row_index + box_row) >= 0 and (col_index + box_col) < width: 
+                        #print("    box_col is: ", box_col, " box_row is: ", box_row) 
+                        if box_col != 0:
+                            if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) < width and (col_index + box_col) >= 0:
                                 this_pixel = image_copy[row_index + box_row][col_index + box_col]
                                 print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
-                    """
+                    
+                        #negative rows and negative columns
+                        box_col = box_col * -1
+                        #print("    box_col is: ", box_col, " box_row is: ", box_row)
+                        if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) >= 0 and (col_index + box_col) < width:
+                            this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                            print("   4-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
             
+            """
+            next steps
+            TypeError: append() takes exactly one argument (2 given)
+            create list and append it tracking the current position
+            >>> c.append((1,2))
+            >>> c
+            [(1, 2)]
+            >>> c.append((1,2))
+            >>> c
+            [(1, 2), (1, 2)]
+            >>> (1,2) in c
+            """
+
+
             """
             2,2
             [1,1][1,2][1,3]
