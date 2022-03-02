@@ -576,24 +576,55 @@ def blur(image,radius=1):
             alpha_average_box = 0
 
             # loop over postive positive radius
-            print(" BOX is:")
+            #print(" BOX is:")
             
-            for box_row in range(radius):
-                print("  box_row is: ", box_row)
-                
-                for box_col in range(radius):
-                    if (row_index + box_row) < height and (col_index + box_col) < width: 
-                        this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                        print("   box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+            if row_index == 2 and col_index == 2:           # just for testing
+            
+                for box_row in range(radius):
+                    print("  box_row is: ", box_row)
+                    
+                    
+                    for box_col in range(radius):
+                        if (row_index + box_row) < height and (col_index + box_col) < width: 
+                            this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                            print("   1-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
 
-                for box_col in range(radius):
-                    box_col = box_col * -1
-                    box_row = box_row * -1
-                    if (row_index + box_row) < height and (col_index + box_col) >= 0: 
-                        this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                        print("   box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
-                
-         
+                    for box_col in range(radius):
+                        if box_col > 0:
+                            if (row_index - box_row) >= 0 and (col_index - box_col) >= 0: 
+                                this_pixel = image_copy[row_index - box_row][col_index - box_col]
+                                print("   2-box_col is: ", box_col, " position is: ", row_index-box_row, col_index-box_col, "pixel is: ", this_pixel)
+
+                    for box_col in range(radius):
+                        if box_col > 0:
+                            if (row_index + box) < height and (col_index - box_col) >= 0: 
+                                this_pixel = image_copy[row_index + box_row][col_index - box_col]
+                                print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index-box_col, "pixel is: ", this_pixel)
+
+
+                    """
+                    for box_col in range(radius):
+                        if box_col > 0:
+                            box_col = box_col * -1
+                            if (row_index + box_row) < height and (col_index + box_col) >= 0: 
+                                this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                                print("   2-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+                    
+                    for box_col in range(radius):
+                        box_row = box_row * -1
+                        if box_row > 0:
+                            if (row_index + box_row) >= 0 and (col_index + box_col) < width: 
+                                this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                                print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+                    """
+            
+            """
+            2,2
+            [1,1][1,2][1,3]
+            [2,1][2,2][2,3]
+            [3,1][3,2][3,3]
+            """
+
 
             # assign the average to the pixel in the original
             pixel_master = image[row_index][col_index]
