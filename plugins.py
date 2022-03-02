@@ -505,7 +505,7 @@ def vignette(image):
     return True
 
 
-def blur(image,radius=5):
+def blur(image,radius=1):
     """
     Returns True after bluring the image.
     
@@ -543,27 +543,57 @@ def blur(image,radius=5):
     # get image specs
     height = len(image)
     width  = len(image[0])
+    print()
+    print("height is: ", height, "width is: ", width, "radius is: ", radius)
 
     # create a copy of the image
     image_copy = copy.deepcopy(image)
 
     # loop over all pixels
+    print()
     for row_index in range(height):
 
         for col_index in range(width):
 
             # get the current pixel
             pixel = image_copy[row_index][col_index]
-            #print("row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
+            print("row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
 
-            print("pixel.red is: ", pixel.red)
-            print("pixel.green is: ", pixel.green)
-            print("pixel.blue is: ", pixel.blue)
-            print("pixel.alpha is: ", pixel.alpha)
+            #print("pixel.red is: ", pixel.red)
+            #print("pixel.green is: ", pixel.green)
+            #print("pixel.blue is: ", pixel.blue)
+            #print("pixel.alpha is: ", pixel.alpha)
             
             # get the average of the pixel
             pixel_average = int((pixel.red + pixel.green + pixel.blue + pixel.alpha) / 4)
-            print("pixel_average is: ", pixel_average)
+            #print("pixel_average is: ", pixel_average)
+
+            # get the average of all the pixels in the box
+            pixel_average_box = 0
+            red_average_box = 0
+            blue_average_box = 0
+            green_average_box = 0
+            alpha_average_box = 0
+
+            # loop over postive positive radius
+            print(" BOX is:")
+            
+            for box_row in range(radius):
+                print("  box_row is: ", box_row)
+                
+                for box_col in range(radius):
+                    if (row_index + box_row) < height and (col_index + box_col) < width: 
+                        this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                        print("   box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+
+                for box_col in range(radius):
+                    box_col = box_col * -1
+                    box_row = box_row * -1
+                    if (row_index + box_row) < height and (col_index + box_col) >= 0: 
+                        this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                        print("   box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+                
+         
 
             # assign the average to the pixel in the original
             pixel_master = image[row_index][col_index]
@@ -572,10 +602,16 @@ def blur(image,radius=5):
             pixel_master.blue = pixel_average
             pixel_master.alpha = pixel_average
 
-          
-    display(image)
+
+    print()
+    print(" ORIGINAL IMAGE ")    
+    display(image_copy)
     
-    return True
+    print()
+    print(" MODIFIED IMAGE")
+    display(image)
+
+    return False
 
 
 
