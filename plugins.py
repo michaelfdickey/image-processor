@@ -578,7 +578,12 @@ def blur(image,radius=1):
 
             # loop over postive positive radius
             
-            box = []  #the list that will be made up of the points in the box to blur values from 
+            box = []  #the list that will be made up of the points in the box to blur values from
+            red_average = 0
+            green_average = 0
+            blue_avareage = 0
+            alpha_average = 0
+            pixel_average = 0  
 
             #if row_index == 2 and col_index == 2:           # just for testing
             
@@ -596,7 +601,24 @@ def blur(image,radius=1):
                         if box_slot_row >= 0 and box_slot_row < height:
                             if box_slot_col >= 0 and box_slot_col < width:
                                 box.append((box_slot_row,box_slot_col))
-                                #print("     box is:", box)
+
+                                
+                                # get pixel info
+                                this_pixel = image[box_slot_row][box_slot_col]
+                                print(" row:", box_slot_row, "col:",box_slot_col, "this_pixel is:", this_pixel) 
+
+                                """
+                                here, working on getting the average of each pixel color but first
+                                making sure it grabs the correct pixels, not clear why output keeps showing (0,0,0,0) pixles
+                                """
+
+                                """
+                                row_index: 0 col_index: 1 pixel: (255,0,0,255)
+                                 row: 0 col: 1 this_pixel is: (255,0,0,255)
+                                 row: 0 col: 0 this_pixel is: (0,0,0,0)  <-- this is the problem
+                                  box is:  [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)]
+                                """
+                                
 
                     # minus row, plus col
                     ##print("  ",(row_index - box_row), (col_index + box_col))  
@@ -658,11 +680,11 @@ def blur(image,radius=1):
 
     print()
     print(" ORIGINAL IMAGE ")    
-    display(image_copy)
+    #display(image_copy)
     
     print()
     print(" MODIFIED IMAGE")
-    display(image)
+    #display(image)
 
     return False
 
