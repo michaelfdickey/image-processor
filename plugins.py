@@ -551,13 +551,14 @@ def blur(image,radius=1):
 
     # loop over all pixels
     print()
+    box = []  #the list that will be made up of the points in the box to blur values from 
     for row_index in range(height):
 
         for col_index in range(width):
 
             # get the current pixel
             pixel = image_copy[row_index][col_index]
-            print("row is: ", row_index, "col is: ", col_index, "pixel is: ", pixel)
+            print("row_index:", row_index, "col_index:", col_index, "pixel:", pixel)
 
             #print("pixel.red is: ", pixel.red)
             #print("pixel.green is: ", pixel.green)
@@ -578,42 +579,89 @@ def blur(image,radius=1):
             # loop over postive positive radius
             #print(" BOX is:")
             
+
+
             if row_index == 2 and col_index == 2:           # just for testing
             
-                for box_row in range(radius):
-                    print("  box_row is: ", box_row)
-                    
-                    for box_col in range(radius):
+                for box_row in range(radius+1):
+                    #print("  box_row:", box_row, "radius:", radius)
+
+                    for box_col in range(radius+1):                          
+                        # minus row, minus col
+                        #print("  ",(row_index - box_row), (col_index - box_col))  
+                        box_slot_row = (row_index - box_row)
+                        box_slot_col = (col_index - box_col)                      
                         
-                        # positive rows and positive columns
-                        if (row_index + box_row) < height and (col_index + box_col) < width: 
-                            this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                            print("   1-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+                        if (box_slot_row,box_slot_col) not in box:
+                            #print("   ", "1-box_slot_row", box_slot_row, "box_slot_col", box_slot_col, "not in box, appending")
+                            box.append((box_slot_row,box_slot_col))
+                            #print("     box is:", box)
 
-                        #positive rows and negative columns
-                        box_col = box_col * -1
-                        #print("    box_col is: ", box_col, " box_row is: ", box_row)
-                        if box_col != 0:
-                            if (row_index + box_row) < height and (col_index + box_col) >= 0:
-                                this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                                print("   2-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+                        # minus row, plus col
+                        ##print("  ",(row_index - box_row), (col_index + box_col))  
+                        box_slot_row = (row_index - box_row)
+                        box_slot_col = (col_index + box_col)
 
-                        #negative rows and positive columns
-                        box_col = box_col * -1
-                        box_row = box_row * -1
-                        #print("    box_col is: ", box_col, " box_row is: ", box_row) 
-                        if box_col != 0:
-                            if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) < width and (col_index + box_col) >= 0:
-                                this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                                print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
-                    
-                        #negative rows and negative columns
-                        box_col = box_col * -1
-                        #print("    box_col is: ", box_col, " box_row is: ", box_row)
-                        if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) >= 0 and (col_index + box_col) < width:
-                            this_pixel = image_copy[row_index + box_row][col_index + box_col]
-                            print("   4-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
-            
+                        if (box_slot_row,box_slot_col) not in box:
+                            #print("   ", "2-box_slot_row", box_slot_row, "box_slot_col", box_slot_col, "not in box, appending")
+                            box.append((box_slot_row,box_slot_col))
+                        
+                        
+                        # plus row, minus col
+                        ##print("  ",(row_index + box_row), (col_index - box_col))
+                        box_slot_row = (row_index + box_row)
+                        box_slot_col = (col_index - box_col)
+
+                        if (box_slot_row,box_slot_col) not in box:
+                            box.append((box_slot_row,box_slot_col))
+                        
+                        
+                        # plus row, plus col
+                        ##print("  ",(row_index + box_row), (col_index + box_col))
+                        box_slot_row = (row_index + box_row)
+                        box_slot_col = (col_index + box_col)
+
+                        if (box_slot_row,box_slot_col) not in box:
+                            box.append((box_slot_row,box_slot_col))
+
+
+                box.sort()
+                print("  box is: ", box)
+
+
+
+            """
+            # positive rows and positive columns
+            if (row_index + box_row) < height and (col_index + box_col) < width: 
+                this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                print("   1-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+
+            #positive rows and negative columns
+            box_col = box_col * -1
+            #print("    box_col is: ", box_col, " box_row is: ", box_row)
+            if box_col != 0:
+                if (row_index + box_row) < height and (col_index + box_col) >= 0:
+                    this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                    print("   2-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+
+            #negative rows and positive columns
+            box_col = box_col * -1
+            box_row = box_row * -1
+            #print("    box_col is: ", box_col, " box_row is: ", box_row) 
+            if box_col != 0:
+                if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) < width and (col_index + box_col) >= 0:
+                    this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                    print("   3-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+        
+            #negative rows and negative columns
+            box_col = box_col * -1
+            #print("    box_col is: ", box_col, " box_row is: ", box_row)
+            if (row_index + box_row) >= 0 and (row_index + box_row) < height and (col_index + box_col) >= 0 and (col_index + box_col) < width:
+                this_pixel = image_copy[row_index + box_row][col_index + box_col]
+                print("   4-box_col is: ", box_col, " position is: ", row_index+box_row, col_index+box_col, "pixel is: ", this_pixel)
+            """
+
+
             """
             next steps
             TypeError: append() takes exactly one argument (2 given)
