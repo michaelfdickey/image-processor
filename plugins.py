@@ -577,7 +577,6 @@ def blur(image,radius=1):
             alpha_average_box = 0
 
             # loop over postive positive radius
-            #print(" BOX is:")
             
             box = []  #the list that will be made up of the points in the box to blur values from 
 
@@ -594,8 +593,10 @@ def blur(image,radius=1):
                     
                     if (box_slot_row,box_slot_col) not in box:
                         #print("   ", "1-box_slot_row", box_slot_row, "box_slot_col", box_slot_col, "not in box, appending")
-                        box.append((box_slot_row,box_slot_col))
-                        #print("     box is:", box)
+                        if box_slot_row >= 0 and box_slot_row < height:
+                            if box_slot_col >= 0 and box_slot_col < width:
+                                box.append((box_slot_row,box_slot_col))
+                                #print("     box is:", box)
 
                     # minus row, plus col
                     ##print("  ",(row_index - box_row), (col_index + box_col))  
@@ -604,7 +605,11 @@ def blur(image,radius=1):
 
                     if (box_slot_row,box_slot_col) not in box:
                         #print("   ", "2-box_slot_row", box_slot_row, "box_slot_col", box_slot_col, "not in box, appending")
-                        box.append((box_slot_row,box_slot_col))
+                        if box_slot_row >= 0 and box_slot_row < height:
+                            if box_slot_col >= 0 and box_slot_col < width:
+                                box.append((box_slot_row,box_slot_col))
+                                #print("     box is:", box)
+
                     
                     
                     # plus row, minus col
@@ -613,7 +618,10 @@ def blur(image,radius=1):
                     box_slot_col = (col_index - box_col)
 
                     if (box_slot_row,box_slot_col) not in box:
-                        box.append((box_slot_row,box_slot_col))
+                        if box_slot_row >= 0 and box_slot_row < height:
+                            if box_slot_col >= 0 and box_slot_col < width:
+                                box.append((box_slot_row,box_slot_col))
+                                #print("     box is:", box)))
                     
                     
                     # plus row, plus col
@@ -622,48 +630,14 @@ def blur(image,radius=1):
                     box_slot_col = (col_index + box_col)
 
                     if (box_slot_row,box_slot_col) not in box:
-                        box.append((box_slot_row,box_slot_col))
+                        if box_slot_row >= 0 and box_slot_row < height:
+                            if box_slot_col >= 0 and box_slot_col < width:
+                                box.append((box_slot_row,box_slot_col))
+                                #print("     box is:", box)
 
 
             box.sort()
             print("  box is: ", box)
-
-
-            """
-            row_index: 0 col_index: 0 pixel: (255,0,0,255)
-            box is:  [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 0), (0, 1), (1, -1), (1, 0), (1, 1)]
-            row_index: 0 col_index: 1 pixel: (255,0,0,255)
-            box is:  [(-1, 0), (-1, 1), (-1, 2), (0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2)]
-            row_index: 0 col_index: 2 pixel: (255,255,0,255)
-            box is:  [(-1, 1), (-1, 2), (-1, 3), (0, 1), (0, 2), (0, 3), (1, 1), (1, 2), (1, 3)]
-            row_index: 0 col_index: 3 pixel: (255,255,0,255)
-            box is:  [(-1, 2), (-1, 3), (-1, 4), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4)]
-            row_index: 1 col_index: 0 pixel: (255,0,0,255)
-            box is:  [(0, -1), (0, 0), (0, 1), (1, -1), (1, 0), (1, 1), (2, -1), (2, 0), (2, 1)]
-            row_index: 1 col_index: 1 pixel: (255,0,0,255)
-            box is:  [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
-            row_index: 1 col_index: 2 pixel: (255,255,0,255)
-            box is:  [(0, 1), (0, 2), (0, 3), (1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3)]
-            row_index: 1 col_index: 3 pixel: (255,255,0,255)
-            box is:  [(0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4)]
-            row_index: 2 col_index: 0 pixel: (0,0,255,255)
-            box is:  [(1, -1), (1, 0), (1, 1), (2, -1), (2, 0), (2, 1), (3, -1), (3, 0), (3, 1)]
-            row_index: 2 col_index: 1 pixel: (0,0,255,255)
-            box is:  [(1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (3, 2)]
-            row_index: 2 col_index: 2 pixel: (255,254,255,255)
-            box is:  [(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3)]
-            row_index: 2 col_index: 3 pixel: (255,254,255,255)
-            box is:  [(1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4)]
-            row_index: 3 col_index: 0 pixel: (0,0,255,255)
-            box is:  [(2, -1), (2, 0), (2, 1), (3, -1), (3, 0), (3, 1), (4, -1), (4, 0), (4, 1)]
-            row_index: 3 col_index: 1 pixel: (0,0,255,255)
-            box is:  [(2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (3, 2), (4, 0), (4, 1), (4, 2)]
-            row_index: 3 col_index: 2 pixel: (255,254,255,255)
-            box is:  [(2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3), (4, 1), (4, 2), (4, 3)]
-            row_index: 3 col_index: 3 pixel: (255,254,255,255)
-            box is:  [(2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4), (4, 2), (4, 3), (4, 4)]
-            """
-
 
 
             """
